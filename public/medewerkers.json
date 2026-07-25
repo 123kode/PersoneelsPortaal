@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "voornaam": "Jan",
+    "naam": "Janssens",
+    "dienst": "ICT",
+    "functie": "Inspecteur",
+    "aanwezig": true,
+    "email": "jan.janssens@politie.be",
+    "telefoon": "056111111",
+    "foto": "jan.jpg"
+  },
+  {
+    "id": 2,
+    "voornaam": "Sofie",
+    "naam": "Peeters",
+    "dienst": "HR",
+    "functie": "Consulent",
+    "aanwezig": false,
+    "email": "sofie.peeters@politie.be",
+    "telefoon": "056222222",
+    "foto": "sofie.jpg"
+  },
+  {
+    "id": 3,
+    "voornaam": "Koen",
+    "naam": "Demeulenaere",
+    "dienst": "ILP",
+    "functie": "Hoofdinspecteur",
+    "aanwezig": true,
+    "email": "koen.demeulenaere@politie.be",
+    "telefoon": "056333333",
+    "foto": "koen.jpg"
+  },
+  {
+    "id": 4,
+    "voornaam": "Robbe",
+    "naam": "Demeulenaere",
+    "dienst": "ILP",
+    "functie": "Hoofdcommissaris",
+    "aanwezig": true,
+    "email": "koen.demeulenaere@politie.be",
+    "telefoon": "056333333",
+    "foto": "robbe.jpg"
+  }
+]
