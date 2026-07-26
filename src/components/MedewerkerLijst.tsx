@@ -30,7 +30,6 @@ function MedewerkerLijst({
     geselecteerdeMedewerker,
     onSelecteer,
     onSelecteerDienst,
-    onSelecteerFunctie,
     onToggleFavoriet,
     onWisFilters,
 }: MedewerkerLijstProps) {
