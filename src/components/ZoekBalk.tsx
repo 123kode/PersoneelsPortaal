@@ -7,7 +7,7 @@ function ZoekBalk({ zoekTekst, onZoekTekstChanged }: ZoekBalkProps) {
     return (
         <input
             type="text"
-            placeholder="Typ een naam..."
+            placeholder="Zoek op naam, graad, afdeling, team, groep, gebouw, functie ..."
             value={zoekTekst}
             onChange={(e) => onZoekTekstChanged(e.target.value)}
         />

@@ -5,81 +5,242 @@ interface MedewerkerLijstProps {
     zoekTekst: string;
     sorteerVolgorde: string;
     dienstFilter: string;
+    functieFilter: string;
+    aanwezigFilter: string;
+    favorietenFilter: string;
+    favorieten: number[];
     geselecteerdeMedewerker: Medewerker | null;
+    onSelecteerDienst: (dienst: string) => void;
+    onSelecteerFunctie: (functie: string) => void;
     onSelecteer: (medewerker: Medewerker) => void;
+    onToggleFavoriet: (id: number) => void;
+    onWisFilters: () => void;
 }
+
 
 function MedewerkerLijst({
     medewerkers,
     zoekTekst,
     sorteerVolgorde,
     dienstFilter,
+    functieFilter,
+    aanwezigFilter,
+    favorietenFilter,
+    favorieten,
     geselecteerdeMedewerker,
     onSelecteer,
+    onSelecteerDienst,
+    onSelecteerFunctie,
+    onToggleFavoriet,
+    onWisFilters,
 }: MedewerkerLijstProps) {
+
+    const gefilterdeMedewerkers = medewerkers
+
+        .filter(medewerker => {
+
+            const zoekInhoud = `
+    ${medewerker.voornaam}
+    ${medewerker.naam}
+    ${medewerker.functie}
+    ${medewerker.dienst}
+    ${medewerker.team ?? ""}
+    ${medewerker.specifiekeGroep?.join(" ") ?? ""}
+    ${medewerker.gebouw ?? ""}
+    ${medewerker.email}
+    ${medewerker.telefoon}
+    ${medewerker.vastToestel ?? ""}
+`.toLowerCase();
+
+            return zoekInhoud.includes(
+                zoekTekst.toLowerCase()
+            );
+        })
+
+        .filter(medewerker => {
+
+            if (dienstFilter === "") {
+                return true;
+            }
+
+            return medewerker.dienst === dienstFilter;
+        })
+
+        .filter(medewerker => {
+
+            if (functieFilter === "") {
+                return true;
+            }
+
+            return medewerker.functie === functieFilter;
+        })
+
+        .filter(medewerker => {
+
+            if (aanwezigFilter === "") {
+                return true;
+            }
+
+            if (aanwezigFilter === "aanwezig") {
+                return medewerker.aanwezig;
+            }
+
+            return !medewerker.aanwezig;
+        })
+
+        .filter(medewerker => {
+
+            if (favorietenFilter === "") {
+                return true;
+            }
+
+            return favorieten.includes(medewerker.id);
+        })
+
+        .sort((a, b) => {
+
+            const naamA =
+                `${a.naam} ${a.voornaam}`;
+
+            const naamB =
+                `${b.naam} ${b.voornaam}`;
+
+            if (sorteerVolgorde === "AZ") {
+                return naamA.localeCompare(naamB);
+            }
+
+            return naamB.localeCompare(naamA);
+        });
 
     return (
         <>
-            {medewerkers
-                .filter(medewerker =>
-                    `${medewerker.voornaam} ${medewerker.naam}`
-                        .toLowerCase()
-                        .includes(zoekTekst.toLowerCase())
-                )
 
-                .filter(medewerker => {
+            <div className="resultaten-teller">
 
-                    if (dienstFilter === "") {
-                        return true;
-                    }
+                {gefilterdeMedewerkers.length === 1
+                    ? "1 medewerker gevonden"
+                    : `${gefilterdeMedewerkers.length} medewerkers gevonden`}
 
-                    return medewerker.dienst === dienstFilter;
+            </div>
 
-                })
+            <div className="medewerker-lijst">
 
-                .sort((a, b) => {
+                {gefilterdeMedewerkers.map(medewerker => {
 
-                    const naamA = `${a.voornaam} ${a.naam}`;
-                    const naamB = `${b.voornaam} ${b.naam}`;
+                    const isFavoriet =
+                        favorieten.includes(medewerker.id);
 
-                    if (sorteerVolgorde === "AZ") {
-                        return naamA.localeCompare(naamB);
-                    }
+                    return (
 
-                    return naamB.localeCompare(naamA);
+                        <div
+                            key={medewerker.id}
+                            onClick={() =>
+                                onSelecteer(medewerker)
+                            }
+                            className={
+                                geselecteerdeMedewerker?.id === medewerker.id
+                                    ? "medewerker-card geselecteerd"
+                                    : "medewerker-card"
+                            }
+                        >
 
-                })
-                .map(medewerker => (
-                    <div
-                        key={medewerker.id}
-                        onClick={() => onSelecteer(medewerker)}
-                        className={
-                            geselecteerdeMedewerker?.id === medewerker.id
-                                ? "medewerker-card geselecteerd"
-                                : "medewerker-card"
-                        }
-                    >
-                        <div className="kaart-header">
+                            <div className="medewerker-info">
 
-                            <div className="medewerker-naam">
-                                {medewerker.voornaam} {medewerker.naam}
+                                <div className="medewerker-naam">
+                                    {medewerker.naam}, {medewerker.voornaam}
+                                </div>
+
+                                <div className="medewerker-functie">
+                                    {medewerker.functie}
+                                </div>
+
+                                <button
+                                    type="button"
+                                    className="medewerker-dienst dienst-link"
+                                    onClick={(e) => {
+
+                                        e.stopPropagation();
+
+                                        onSelecteerDienst(
+                                            medewerker.dienst
+                                        );
+                                    }}
+                                >
+                                    {medewerker.dienst}
+                                </button>
+
                             </div>
 
-                            <div className="status-bol">
-                                {medewerker.aanwezig ? "🟢" : "🔴"}
+                            <div className="kaart-acties">
+
+                                <button
+                                    type="button"
+                                    className={
+                                        isFavoriet
+                                            ? "favoriet-knop actief"
+                                            : "favoriet-knop"
+                                    }
+                                    title={
+                                        isFavoriet
+                                            ? "Verwijder uit favorieten"
+                                            : "Voeg toe aan favorieten"
+                                    }
+                                    onClick={(e) => {
+
+                                        e.stopPropagation();
+
+                                        onToggleFavoriet(
+                                            medewerker.id
+                                        );
+                                    }}
+                                >
+                                    {isFavoriet ? "★" : "☆"}
+                                </button>
+
+                                <div
+                                    className={
+                                        medewerker.aanwezig
+                                            ? "lijst-status aanwezig"
+                                            : "lijst-status afwezig"
+                                    }
+                                    title={
+                                        medewerker.aanwezig
+                                            ? "Aanwezig"
+                                            : "Afwezig"
+                                    }
+                                ></div>
+
                             </div>
 
                         </div>
 
-                        <div className="medewerker-functie">
-                            {medewerker.functie}
-                        </div>
+                    );
+                })}
 
-                        <div className="medewerker-dienst">
-                            {medewerker.dienst}
-                        </div>
+            </div>
+
+            {gefilterdeMedewerkers.length === 0 && (
+                <div className="geen-resultaten">
+
+                    <div className="geen-resultaten-titel">
+                        Geen medewerkers gevonden
                     </div>
-                ))}
+
+                    <div className="geen-resultaten-tekst">
+                        Pas je zoekopdracht aan of verwijder een filter.
+                    </div>
+
+                    <button
+                        type="button"
+                        className="wis-filters-knop"
+                        onClick={onWisFilters}
+                    >
+                        Wis filters
+                    </button>
+
+                </div>
+            )}
+
         </>
     );
 }

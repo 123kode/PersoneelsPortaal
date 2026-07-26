@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "naam": "Wijk",
+        "diensthoofd": "An Goossens",
+        "email": "wijk@politie.be",
+        "telefoon": "056 00 00 01",
+        "locatie": "Commissariaat - gelijkvloers"
+    },
+    {
+        "id": 2,
+        "naam": "Interventie",
+        "diensthoofd": "Arne Maes",
+        "email": "interventie@politie.be",
+        "telefoon": "056 00 00 02",
+        "locatie": "Commissariaat - verdieping 1"
+    },
+    {
+        "id": 3,
+        "naam": "Recherche",
+        "diensthoofd": "Eline Willems",
+        "email": "recherche@politie.be",
+        "telefoon": "056 00 00 03",
+        "locatie": "Commissariaat - verdieping 2"
+    },
+    {
+        "id": 4,
+        "naam": "Onthaal",
+        "diensthoofd": "Sophie De Smet",
+        "email": "onthaal@politie.be",
+        "telefoon": "056 00 00 04",
+        "locatie": "Commissariaat - gelijkvloers"
+    },
+    {
+        "id": 5,
+        "naam": "Verkeer",
+        "diensthoofd": "Tom Vermeulen",
+        "email": "verkeer@politie.be",
+        "telefoon": "056 00 00 05",
+        "locatie": "Commissariaat - verdieping 1"
+    }
+]

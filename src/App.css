@@ -1,124 +1,1290 @@
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
+/* =========================
+   ALGEMEEN
+   ========================= */
+
+* {
+    box-sizing: border-box;
 }
 
-.container {
-  max-width: 700px;
-  margin: 50px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    color: #222;
+}
+
+.App {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 40px 40px;
 }
 
 h1 {
-  margin-top: 0;
-  color: #003369;
+    margin-top: 0;
+    color: #003369;
 }
 
 h2 {
-  color: #666;
-  margin-bottom: 20px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-.main-layout {
-    display: flex;
-    gap: 30px;
-    margin-top: 20px;
+
+/* =========================
+   HEADER
+   ========================= */
+
+.portaal-header {
+    position: relative;
+
+    background-image:
+        linear-gradient(rgba(0, 51, 105, 0.72),
+            rgba(0, 51, 105, 0.72)),
+        url("/images/pz-vlas.jpg");
+
+    background-size: cover;
+    background-position: center 55%;
+
+    border-radius: 12px;
+    padding: 26px 25px 30px;
+    margin-bottom: 16px;
+
+    text-align: center;
 }
 
-.left-panel {
-    width: 35%;
+.portaal-header h1 {
+    color: white;
+    margin: 0;
+    font-size: 42px;
+    line-height: 1.15;
 }
 
-.right-panel {
-    flex: 1;
+.portaal-header .subtitel {
+    color: rgba(255, 255, 255, 0.92);
+    margin: 12px 0 0;
+    font-size: 17px;
+    line-height: 1.4;
 }
 
-.medewerker-card {
+
+/* =========================
+   DASHBOARD
+   ========================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+
+    width: 100%;
+    margin: 16px 0 18px;
+}
+
+.dashboard-kaart {
+    width: 100%;
+    height: 58px;
+    min-width: 0;
+
+    padding: 0 14px;
+    margin: 0;
+
     background: white;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: inherit;
 }
 
-.medewerker-card:hover {
-    background: #f4f8ff;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.medewerker-naam {
+.dashboard-getal {
+    color: #003369;
+    font-size: 22px;
     font-weight: bold;
-    font-size: 17px;
+    line-height: 1;
+    margin: 0;
 }
 
-.medewerker-functie {
+.dashboard-label {
     color: #666;
-    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1;
 }
 
-.medewerker-dienst {
-    color: #0b63ce;
+button.dashboard-kaart {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button.dashboard-kaart:hover {
+    background: #f2f7fd;
+    border-color: #9dbce0;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 2px 6px rgba(0, 51, 105, 0.1);
+}
+
+button.dashboard-kaart:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   FILTERBALK
+   ========================= */
+
+.filterbalk {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.zoekveld {
+    margin-bottom: 15px;
+}
+
+.filter-opties {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-opties select {
+    min-width: 160px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background: white;
+
     font-size: 14px;
 }
 
-.geselecteerd {
-    border: 2px solid #0b63ce;
-    background-color: #eaf3ff;
+.wis-filters-knop {
+    padding: 9px 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 7px;
+
+    background: white;
+    color: #555;
+
+    font-size: 14px;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
 }
+
+.wis-filters-knop:hover {
+    background: #f3f6fa;
+    border-color: #999;
+    color: #003369;
+}
+
+
+/* =========================
+   ACTIEVE FILTERS
+   ========================= */
+
+.actieve-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 12px;
+    padding: 0 4px;
+}
+
+.actieve-filters-label {
+    color: #666;
+    font-size: 13px;
+    margin-right: 2px;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    background: #eef4fb;
+    color: #0b63ce;
+
+    border: 1px solid #d6e5f5;
+    border-radius: 20px;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+}
+
+.filter-chip span {
+    font-size: 17px;
+    line-height: 12px;
+    color: #666;
+}
+
+.filter-chip:hover {
+    background: #dfeeff;
+    border-color: #aac8e8;
+}
+
+.filter-chip:hover span {
+    color: #0b63ce;
+}
+
+
+/* =========================
+   HOOFDLAYOUT
+
+   Links meer plaats voor:
+   naam | graad | dienst
+   ========================= */
+
+.main-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 3fr) minmax(340px, 2fr);
+
+    gap: 20px;
+
+    align-items: start;
+
+    margin-top: 20px;
+}
+
+.left-panel,
+.right-panel {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================
+   RESULTATENTELLER
+   ========================= */
+
+.resultaten-teller {
+    color: #666;
+    font-size: 14px;
+
+    margin-bottom: 12px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   MEDEWERKERLIJST
+   ========================= */
+
+.medewerker-lijst {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+/* =========================
+   MEDEWERKERKAART
+
+   Naam | Graad | Dienst | ☆ ●
+   ========================= */
+
+.medewerker-card {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 58px;
+
+    align-items: center;
+
+    width: 100%;
+    min-height: 54px;
+
+    padding: 8px 12px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.medewerker-card:hover {
+    background: #f7faff;
+    border-color: #b9d2ee;
+}
+
+.medewerker-card.geselecteerd {
+    background: #eef5ff;
+    border-color: #0b63ce;
+
+    box-shadow:
+        0 0 0 1px rgba(11, 99, 206, 0.03);
+}
+
+
+/* =========================
+   NAAM | GRAAD | DIENST
+   ========================= */
+
+.medewerker-info {
+    display: grid;
+
+    grid-template-columns:
+        minmax(130px, 1.15fr) minmax(180px, 1.55fr) minmax(85px, 0.75fr);
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* Naam */
+
+.medewerker-naam {
+    min-width: 0;
+
+    color: #222;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Graad / functie */
+
+.medewerker-functie,
+.functie-link {
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    background: none;
+
+    color: #555;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+}
+
+.medewerker-functie:hover,
+.functie-link:hover {
+    color: #0b63ce;
+    text-decoration: underline;
+}
+
+
+/* Dienst */
+
+.medewerker-dienst,
+.dienst-link {
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    background: none;
+
+    color: #0066cc;
+
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.2;
+
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+}
+
+.medewerker-dienst:hover,
+.dienst-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   FAVORIET + STATUS
+   ========================= */
+
+.kaart-acties {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    width: 58px;
+
+    padding-left: 8px;
+
+    flex-shrink: 0;
+}
+
+.favoriet-knop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    background: transparent;
+
+    color: #888;
+
+    font-size: 21px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        color 0.15s ease;
+}
+
+.favoriet-knop:hover {
+    color: #d99b00;
+    transform: scale(1.12);
+}
+
+.favoriet-knop.actief {
+    color: #d99b00;
+}
+
+.lijst-status {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+.lijst-status.aanwezig {
+    background: #22a06b;
+
+    box-shadow:
+        0 0 0 4px #e8f7ef;
+}
+
+.lijst-status.afwezig {
+    background: #d92d20;
+
+    box-shadow:
+        0 0 0 4px #fdecec;
+}
+
+
+/* =========================
+   MEDEWERKER DETAIL
+   ========================= */
 
 .detail-card {
+    width: 100%;
+
     background: white;
+
     border: 1px solid #ddd;
     border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-.detail-card h2 {
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
+    padding: 24px;
 
-.detail-card p {
-    margin: 10px 0;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .detail-header {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
+
+    gap: 18px;
+
+    margin-bottom: 24px;
 }
 
 .detail-foto {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
+
     border-radius: 50%;
+
     object-fit: cover;
+
+    flex-shrink: 0;
 }
 
-.detail-header h2 {
+.detail-identiteit {
+    min-width: 0;
+}
+
+.detail-identiteit h2 {
+    margin: 0 0 5px;
+
+    color: #333;
+
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+.detail-functie {
+    color: #666;
+
+    font-size: 17px;
+    line-height: 1.35;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   STATUS BADGE DETAIL
+   ========================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-badge.aanwezig {
+    background: #e8f7ef;
+    color: #18794e;
+}
+
+.status-badge.afwezig {
+    background: #fdecec;
+    color: #b42318;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+}
+
+
+/* =========================
+   DETAILGEGEVENS
+   ========================= */
+
+.detail-gegevens {
+    border-top: 1px solid #eee;
+    padding: 16px 0;
+}
+
+.detail-gegevens+.detail-gegevens {
+    border-top: 1px solid #eee;
+}
+
+.detail-sectie-titel {
+    margin-bottom: 10px;
+
+    color: #444;
+
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.detail-rij {
+    display: grid;
+
+    grid-template-columns:
+        125px minmax(0, 1fr);
+
+    gap: 12px;
+
+    align-items: center;
+
+    min-width: 0;
+
+    padding: 7px 0;
+}
+
+.detail-label {
+    width: auto;
+
+    color: #666;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.detail-rij a {
+    min-width: 0;
+
+    color: #0b63ce;
+
+    text-decoration: none;
+}
+
+.detail-rij a:hover {
+    text-decoration: underline;
+}
+
+.dienst-badge {
+    justify-self: start;
+
+    background: #eef4fb;
+    color: #0b63ce;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   CONTACTGEGEVENS
+   ========================= */
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.contact-icoon {
+    width: 18px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   DETAIL ACTIES
+   ========================= */
+
+.detail-acties {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.actie-knop {
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    border: 1px solid #0b63ce;
+    border-radius: 7px;
+
+    color: #0b63ce;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.actie-knop:hover {
+    background: #eef4fb;
+}
+
+.actie-knop.primair {
+    background: #0b63ce;
+    color: white;
+}
+
+.actie-knop.primair:hover {
+    background: #084f9f;
+}
+
+
+/* =========================
+   GEEN MEDEWERKER GESELECTEERD
+   ========================= */
+
+.detail-placeholder {
+    width: 100%;
+
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    color: #777;
+}
+
+.detail-placeholder h3 {
+    color: #444;
+
+    margin-bottom: 8px;
+}
+
+.detail-placeholder p {
     margin: 0;
 }
 
-.detail-header h3 {
-    margin-top: 8px;
+.placeholder-icoon {
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   DIENST DETAIL
+   ========================= */
+
+.dienst-detail-card {
+    width: 100%;
+
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dienst-detail-header {
+    margin-bottom: 22px;
+
+    text-align: center;
+}
+
+.dienst-label {
+    color: #777;
+
+    font-size: 14px;
+
+    margin-bottom: 4px;
+}
+
+.dienst-detail-header h2 {
+    margin: 0;
+
+    color: #333;
+
+    font-size: 28px;
+}
+
+.dienst-statistieken {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+.dienst-statistiek {
+    flex: 1;
+
+    background: #f5f8fc;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    text-align: center;
+}
+
+.dienst-statistiek strong {
+    display: block;
+
+    color: #003369;
+
+    font-size: 24px;
+
+    margin-bottom: 4px;
+}
+
+.dienst-statistiek span {
     color: #666;
-    font-weight: normal;
+
+    font-size: 13px;
+}
+
+.dienst-statistiek-knop {
+    border: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.dienst-statistiek-knop:hover {
+    background: #e6f0ff;
+
+    transform: translateY(-2px);
+}
+
+.dienst-statistiek-knop:active {
+    transform: translateY(0);
+}
+
+.dienst-detail-card .detail-rij {
+    display: grid;
+
+    grid-template-columns: 110px minmax(0, 1fr);
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+.dienst-detail-card .detail-label {
+    width: auto;
+}
+
+.dienst-detail-card .detail-acties {
+    margin-top: 22px;
+}
+
+.diensthoofd-link {
+    padding: 0;
+
+    border: 0;
+    background: none;
+
+    font: inherit;
+    color: #0b63ce;
+
+    cursor: pointer;
+    text-align: left;
+}
+
+.diensthoofd-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   GEEN RESULTATEN
+   ========================= */
+
+.geen-resultaten {
+    background: white;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+.geen-resultaten-titel {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+
+    margin-bottom: 8px;
+}
+
+.geen-resultaten-tekst {
+    color: #666;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   GEPLANDE PRESTATIES
+   ========================= */
+
+.planning-blok {
+    margin-top: 22px;
+
+    padding: 18px 20px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e3e7eb;
+    border-radius: 10px;
+}
+
+.planning-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.planning-header h3 {
+    margin: 0;
+
+    color: #333;
+
+    font-size: 16px;
+}
+
+.planning-demo {
+    padding: 3px 8px;
+
+    background: #eef4fb;
+    color: #0b63ce;
+
+    border-radius: 12px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.planning-rij {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid #e8e8e8;
+
+    font-size: 14px;
+}
+
+.planning-rij:last-child {
+    border-bottom: none;
+}
+
+.planning-rij span {
+    color: #666;
+}
+
+.planning-rij strong {
+    color: #333;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.planning-rij .planning-rust {
+    color: #777;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 950px) {
+
+    .App {
+        padding: 22px;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+    }
+
+    .medewerker-info {
+        grid-template-columns:
+            minmax(140px, 1.1fr) minmax(190px, 1.4fr) minmax(100px, 0.8fr);
+    }
+}
+
+
+/* =========================
+   GSM
+   ========================= */
+
+@media (max-width: 750px) {
+
+    .App {
+        padding: 15px;
+    }
+
+    .portaal-header {
+        padding: 24px 15px;
+    }
+
+    .portaal-header h1 {
+        font-size: 30px;
+    }
+
+    .portaal-header .subtitel {
+        font-size: 15px;
+    }
+
+    .dashboard {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard-kaart {
+        padding: 0 8px;
+    }
+
+    .dashboard-getal {
+        font-size: 19px;
+    }
+
+    .dashboard-label {
+        font-size: 12px;
+    }
+
+    .filter-opties {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-opties select {
+        width: 100%;
+    }
+
+    .wis-filters-knop {
+        width: 100%;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    /*
+       Op een smal scherm niet proberen
+       alles in drie kolommen te persen.
+    */
+
+    .medewerker-card {
+        grid-template-columns:
+            minmax(0, 1fr) 58px;
+
+        min-height: 66px;
+    }
+
+    .medewerker-info {
+        grid-template-columns:
+            minmax(0, 1fr) minmax(0, 1fr);
+
+        grid-template-areas:
+            "naam naam"
+            "functie dienst";
+
+        gap: 5px 12px;
+    }
+
+    .medewerker-naam {
+        grid-area: naam;
+    }
+
+    .medewerker-functie,
+    .functie-link {
+        grid-area: functie;
+    }
+
+    .medewerker-dienst,
+    .dienst-link {
+        grid-area: dienst;
+    }
+
+    .detail-card,
+    .dienst-detail-card {
+        padding: 20px;
+    }
+
+    .detail-header {
+        align-items: flex-start;
+
+        gap: 15px;
+
+        margin-bottom: 20px;
+    }
+
+    .detail-foto {
+        width: 82px;
+        height: 82px;
+    }
+
+    .detail-identiteit h2 {
+        font-size: 20px;
+    }
+
+    .detail-functie {
+        font-size: 15px;
+    }
+
+    .detail-label {
+        width: 80px;
+    }
+
+    .contact-rij .contact-link {
+        margin-left: 80px;
+    }
+}
+
+
+/* =========================
+   ZEER SMALLE GSM
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .portaal-header h1 {
+        font-size: 26px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-kaart {
+        height: 48px;
+    }
+
+    .detail-header {
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .detail-rij {
+        align-items: flex-start;
+    }
+
+    .planning-rij {
+        gap: 8px;
+    }
+}
+
+.groep-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.groep-tag {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    background: #f1f5f9;
+    border: 1px solid #dbe3ec;
+    border-radius: 6px;
+
+    font-size: 12px;
+    color: #444;
+
+    white-space: nowrap;
 }
