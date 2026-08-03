@@ -1341,14 +1341,86 @@ button.dashboard-kaart:active {
 }
 
 .graad-titel {
+    width: 100%;
     font-weight: 600;
-    color: #0f5ea8;
-    margin-bottom: 8px;
+    color: #005a9e;
+    border-bottom: 1px solid #dbe5f1;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .graad-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 2px 0;
+
+    width: 100%;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.graad-item:hover {
+    background: #eef6ff;
+}
+
+.graad-groep {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: #f8fafc;
+    border: 1px solid #dbe5f1;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.graad-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.graden-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 10px;
+}
+
+.dashboard-aanwezig {
+    background: #f3fbf5;
+    border: 1px solid #cfe8d5;
+}
+
+.dashboard-afwezig {
+    background: #fff8f2;
+    border: 1px solid #f2d7b5;
+}
+
+.dashboard-totaal {
+    background: #f6f9fd;
+    border: 1px solid #d9e6f5;
+}
+
+.multi-select-filter summary {
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    user-select: none;
+}
+
+.multi-select-filter summary::-webkit-details-marker {
+    display: none;
+}
+
+.multi-select-filter summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+}
+
+.multi-select-filter[open] summary::before {
+    transform: rotate(90deg);
 }

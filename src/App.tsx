@@ -325,7 +325,7 @@ function App() {
 
                 <button
                     type="button"
-                    className="dashboard-kaart dashboard-knop"
+                    className="dashboard-kaart dashboard-knop dashboard-totaal"
                     onClick={() => {
 
                         setZoekTekst("");
@@ -355,7 +355,7 @@ function App() {
 
                 <button
                     type="button"
-                    className="dashboard-kaart dashboard-knop"
+                    className="dashboard-kaart dashboard-knop dashboard-aanwezig"
                     onClick={() => {
 
                         setZoekTekst("");
@@ -385,7 +385,7 @@ function App() {
 
                 <button
                     type="button"
-                    className="dashboard-kaart dashboard-knop"
+                    className="dashboard-kaart dashboard-knop dashboard-afwezig"
                     onClick={() => {
 
                         setZoekTekst("");

@@ -119,6 +119,11 @@ function GradenFilter({
                     ))}
 
                 </div>
+                <div className="graden-acties">
+
+
+
+                </div>
 
             </div>
 
