@@ -1,3 +1,5 @@
+import Plattegrond from "./components/Plattegrond";
+
 import GradenFilter from "./components/GradenFilter";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -15,6 +17,8 @@ import DienstDetail from "./components/DienstDetail";
 import MultiSelectFilter from "./components/MultiSelectFilter";
 
 function App() {
+
+    const [weergave, setWeergave] = useState<"lijst" | "plattegrond">("lijst");
 
     const operationeleGraden = [
         "Aspirant-agent",
@@ -412,6 +416,34 @@ function App() {
 
             <div className="filterbalk">
 
+                <div className="weergave-switch">
+
+                    <button
+                        type="button"
+                        className={
+                            weergave === "lijst"
+                                ? "switch-knop actief"
+                                : "switch-knop"
+                        }
+                        onClick={() => setWeergave("lijst")}
+                    >
+                        👥 Lijst
+                    </button>
+
+                    <button
+                        type="button"
+                        className={
+                            weergave === "plattegrond"
+                                ? "switch-knop actief"
+                                : "switch-knop"
+                        }
+                        onClick={() => setWeergave("plattegrond")}
+                    >
+                        🗺️ Plattegrond
+                    </button>
+
+                </div>
+
                 <div className="zoekveld">
 
                     <ZoekBalk
@@ -621,152 +653,162 @@ function App() {
                 PERSONEEL + DETAIL
                 ===================== */}
 
-            <div className="main-layout">
+            {weergave === "lijst" ? (
+
+                <div className="main-layout">
 
 
-                {/* LINKERKANT */}
+                    {/* LINKERKANT */}
 
-                <div className="left-panel">
-                    <h3>Medewerkers geladen: {medewerkers.length}</h3>
-                    <MedewerkerLijst
-
-                        medewerkers={
-                            medewerkers
-                        }
-
-                        zoekTekst={
-                            zoekTekst
-                        }
-
-                        sorteerVolgorde={
-                            sorteerVolgorde
-                        }
-
-                        dienstFilter={
-                            dienstFilter
-                        }
-
-                        functieFilter={
-                            functieFilter
-                        }
-
-                        aanwezigFilter={
-                            aanwezigFilter
-                        }
-
-                        favorietenFilter={
-                            favorietenFilter
-                        }
-
-                        favorieten={
-                            favorieten
-                        }
-
-                        geselecteerdeMedewerker={
-                            geselecteerdeMedewerker
-                        }
-
-                        onSelecteer={
-                            selecteerMedewerker
-                        }
-
-                        onSelecteerDienst={
-                            selecteerDienst
-                        }
-
-                        onSelecteerFunctie={
-                            selecteerFunctie
-                        }
-
-                        onToggleFavoriet={
-                            toggleFavoriet
-                        }
-
-                        onWisFilters={wisFilters}
-
-                    />
-
-                </div>
-
-
-                {/* RECHTERKANT */}
-
-                <div className="right-panel">
-
-
-                    {geselecteerdeDienst ? (
-
-                        <DienstDetail
-
-                            dienst={
-                                geselecteerdeDienst
-                            }
+                    <div className="left-panel">
+                        <h3>Medewerkers geladen: {medewerkers.length}</h3>
+                        <MedewerkerLijst
 
                             medewerkers={
                                 medewerkers
                             }
 
-                            onSelecteerMedewerker={selecteerMedewerker}
+                            zoekTekst={
+                                zoekTekst
+                            }
 
+                            sorteerVolgorde={
+                                sorteerVolgorde
+                            }
 
-                            /* ALLE MEDEWERKERS
-                               VAN DE DIENST */
+                            dienstFilter={
+                                dienstFilter
+                            }
 
-                            onToonMedewerkers={() => {
+                            functieFilter={
+                                functieFilter
+                            }
 
-                                const dienstNaam =
-                                    vindDienstNaam(
-                                        geselecteerdeDienst.naam
-                                    );
+                            aanwezigFilter={
+                                aanwezigFilter
+                            }
 
-                                if (dienstNaam) {
-                                    setDienstFilter([dienstNaam]);
-                                }
+                            favorietenFilter={
+                                favorietenFilter
+                            }
 
-                                setZoekTekst("");
-                                setFunctieFilter([]);
-                                setAanwezigFilter("");
-                                setFavorietenFilter("");
-                            }}
+                            favorieten={
+                                favorieten
+                            }
 
-                            /* ALLE AANWEZIGE
-                               MEDEWERKERS
-                               VAN DE DIENST */
-
-                            onToonAanwezigen={() => {
-
-                                const dienstNaam =
-                                    vindDienstNaam(
-                                        geselecteerdeDienst.naam
-                                    );
-
-                                if (dienstNaam) {
-                                    setDienstFilter([dienstNaam]);
-                                }
-
-                                setZoekTekst("");
-                                setFunctieFilter([]);
-                                setAanwezigFilter("aanwezig");
-                                setFavorietenFilter("");
-                            }}
-
-                        />
-
-                    ) : (
-
-                        <MedewerkerDetail
-                            medewerker={
+                            geselecteerdeMedewerker={
                                 geselecteerdeMedewerker
                             }
+
+                            onSelecteer={
+                                selecteerMedewerker
+                            }
+
+                            onSelecteerDienst={
+                                selecteerDienst
+                            }
+
+                            onSelecteerFunctie={
+                                selecteerFunctie
+                            }
+
+                            onToggleFavoriet={
+                                toggleFavoriet
+                            }
+
+                            onWisFilters={wisFilters}
+
                         />
 
-                    )}
+                    </div>
+
+
+                    {/* RECHTERKANT */}
+
+                    <div className="right-panel">
+
+
+                        {geselecteerdeDienst ? (
+
+                            <DienstDetail
+
+                                dienst={
+                                    geselecteerdeDienst
+                                }
+
+                                medewerkers={
+                                    medewerkers
+                                }
+
+                                onSelecteerMedewerker={selecteerMedewerker}
+
+
+                                /* ALLE MEDEWERKERS
+                                   VAN DE DIENST */
+
+                                onToonMedewerkers={() => {
+
+                                    const dienstNaam =
+                                        vindDienstNaam(
+                                            geselecteerdeDienst.naam
+                                        );
+
+                                    if (dienstNaam) {
+                                        setDienstFilter([dienstNaam]);
+                                    }
+
+                                    setZoekTekst("");
+                                    setFunctieFilter([]);
+                                    setAanwezigFilter("");
+                                    setFavorietenFilter("");
+                                }}
+
+                                /* ALLE AANWEZIGE
+                                   MEDEWERKERS
+                                   VAN DE DIENST */
+
+                                onToonAanwezigen={() => {
+
+                                    const dienstNaam =
+                                        vindDienstNaam(
+                                            geselecteerdeDienst.naam
+                                        );
+
+                                    if (dienstNaam) {
+                                        setDienstFilter([dienstNaam]);
+                                    }
+
+                                    setZoekTekst("");
+                                    setFunctieFilter([]);
+                                    setAanwezigFilter("aanwezig");
+                                    setFavorietenFilter("");
+                                }}
+
+                            />
+
+                        ) : (
+
+                            <MedewerkerDetail
+                                medewerker={
+                                    geselecteerdeMedewerker
+                                }
+                            />
+
+                        )}
+
+                    </div>
 
                 </div>
 
-            </div>
+            
 
-        </div>
+    ) : (
+
+        <Plattegrond />
+
+    )}
+
+        </div >
     );
 }
 
