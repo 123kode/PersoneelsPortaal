@@ -1,3 +1,4 @@
+import GradenFilter from "./components/GradenFilter";
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -14,6 +15,25 @@ import DienstDetail from "./components/DienstDetail";
 import MultiSelectFilter from "./components/MultiSelectFilter";
 
 function App() {
+
+    const operationeleGraden = [
+        "Aspirant-agent",
+        "Agent",
+        "Aspirant-inspecteur",
+        "Inspecteur",
+        "Aspirant-hoofdinspecteur",
+        "Hoofdinspecteur",
+        "Aspirant-commissaris",
+        "Commissaris",
+        "Hoofdcommissaris",
+    ];
+
+    const calogGraden = [
+        "CALog A",
+        "CALog B",
+        "CALog C",
+        "CALog D",
+    ];
 
     const [medewerkers, setMedewerkers] = useState<Medewerker[]>([]);
     const [dienstGegevens, setDienstGegevens] = useState<Dienst[]>([]);
@@ -207,15 +227,23 @@ function App() {
     /* =========================
        UNIEKE FUNCTIES / GRADEN
        ========================= */
+    const voorkeursVolgorde = [
+        "Aspirant-inspecteur",
+        "Inspecteur",
+        "Hoofdinspecteur",
+        "Commissaris",
+        "Hoofdcommissaris",
+    ];
+
 
     const functies = [
-        ...new Set(
-            medewerkers.map(
-                medewerker =>
-                    medewerker.functie
-            )
-        )
-    ].sort();
+        ...operationeleGraden.filter(graad =>
+            medewerkers.some(m => m.functie === graad)
+        ),
+        ...calogGraden.filter(graad =>
+            medewerkers.some(m => m.functie === graad)
+        ),
+    ];
 
 
     /* =========================
@@ -409,7 +437,7 @@ function App() {
                     {/* DIENST */}
 
                     <MultiSelectFilter
-                        label="Diensten"
+                        label="Afdeling"
                         opties={diensten}
                         geselecteerd={dienstFilter}
                         onChange={(waarden) => {
@@ -424,13 +452,10 @@ function App() {
 
                     {/* GRAAD / FUNCTIE */}
 
-                    <MultiSelectFilter
-                        label="Graden"
-                        opties={functies}
+                    <GradenFilter
+                        beschikbareGraden={functies}
                         geselecteerd={functieFilter}
-                        onChange={(waarden) => {
-                            setFunctieFilter(waarden);
-                        }}
+                        onChange={setFunctieFilter}
                     />
 
 
@@ -615,7 +640,7 @@ function App() {
                 {/* LINKERKANT */}
 
                 <div className="left-panel">
-<h3>Medewerkers geladen: {medewerkers.length}</h3>
+                    <h3>Medewerkers geladen: {medewerkers.length}</h3>
                     <MedewerkerLijst
 
                         medewerkers={
