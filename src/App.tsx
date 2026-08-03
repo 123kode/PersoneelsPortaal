@@ -227,13 +227,6 @@ function App() {
     /* =========================
        UNIEKE FUNCTIES / GRADEN
        ========================= */
-    const voorkeursVolgorde = [
-        "Aspirant-inspecteur",
-        "Inspecteur",
-        "Hoofdinspecteur",
-        "Commissaris",
-        "Hoofdcommissaris",
-    ];
 
 
     const functies = [
