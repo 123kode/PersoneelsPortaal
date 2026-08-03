@@ -302,7 +302,7 @@ function App() {
                 <div className="portaal-header-inhoud">
 
                     <h1>
-                        🌐VLAS CONNECT
+                        🌐VLASconnect
                     </h1>
 
                     <p className="subtitel">
@@ -567,31 +567,29 @@ function App() {
                             </button>
                         )}
 
-                        {dienstFilter && (
+                        {dienstFilter.length > 0 && (
                             <button
                                 type="button"
                                 className="filter-chip"
                                 onClick={() => {
-                                    setDienstFilter([]);;
+                                    setDienstFilter([]);
                                     setGeselecteerdeDienst(null);
                                 }}
-                                title="Dienstfilter verwijderen"
+                                title={`Geselecteerd: ${dienstFilter.join(", ")}\nKlik om alle dienstfilters te verwijderen`}
                             >
-                                {dienstFilter}
+                                🏢 Diensten ({dienstFilter.length})
                                 <span>×</span>
                             </button>
                         )}
 
-                        {functieFilter && (
+                        {functieFilter.length > 0 && (
                             <button
                                 type="button"
                                 className="filter-chip"
-                                onClick={() =>
-                                    setFunctieFilter([])
-                                }
-                                title="Graadfilter verwijderen"
+                                onClick={() => setFunctieFilter([])}
+                                title={`Geselecteerd: ${functieFilter.join(", ")}\nKlik om alle graadfilters te verwijderen`}
                             >
-                                {functieFilter}
+                                👮 Graden ({functieFilter.length})
                                 <span>×</span>
                             </button>
                         )}
@@ -600,14 +598,12 @@ function App() {
                             <button
                                 type="button"
                                 className="filter-chip"
-                                onClick={() =>
-                                    setAanwezigFilter("")
-                                }
+                                onClick={() => setAanwezigFilter("")}
                                 title="Aanwezigheidsfilter verwijderen"
                             >
                                 {aanwezigFilter === "aanwezig"
-                                    ? "Aanwezig"
-                                    : "Afwezig"}
+                                    ? "🟢 Aanwezig"
+                                    : "🟠 Afwezig"}
                                 <span>×</span>
                             </button>
                         )}
@@ -616,9 +612,7 @@ function App() {
                             <button
                                 type="button"
                                 className="filter-chip"
-                                onClick={() =>
-                                    setFavorietenFilter("")
-                                }
+                                onClick={() => setFavorietenFilter("")}
                                 title="Favorietenfilter verwijderen"
                             >
                                 ★ Favorieten
