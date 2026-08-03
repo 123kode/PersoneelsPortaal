@@ -11,6 +11,7 @@ import ZoekBalk from "./components/ZoekBalk";
 import MedewerkerLijst from "./components/MedewerkerLijst";
 import MedewerkerDetail from "./components/MedewerkerDetail";
 import DienstDetail from "./components/DienstDetail";
+import MultiSelectFilter from "./components/MultiSelectFilter";
 
 function App() {
 
@@ -26,8 +27,8 @@ function App() {
         useState<Dienst | null>(null);
 
     const [sorteerVolgorde, setSorteerVolgorde] = useState("AZ");
-    const [dienstFilter, setDienstFilter] = useState("");
-    const [functieFilter, setFunctieFilter] = useState("");
+    const [dienstFilter, setDienstFilter] = useState<string[]>([]);
+    const [functieFilter, setFunctieFilter] = useState<string[]>([]);
     const [aanwezigFilter, setAanwezigFilter] = useState("");
     const [favorietenFilter, setFavorietenFilter] = useState("");
 
@@ -128,7 +129,7 @@ function App() {
         dienstNaam: string
     ) {
 
-        setDienstFilter(dienstNaam);
+        setDienstFilter([dienstNaam]);
 
         const gevondenDienst =
             dienstGegevens.find(
@@ -160,7 +161,7 @@ function App() {
         functie: string
     ) {
 
-        setFunctieFilter(functie);
+        setFunctieFilter([functie]);
 
         // Detailkaart sluiten zodat de resultaten
         // van de filter centraal staan
@@ -177,8 +178,8 @@ function App() {
 
         setZoekTekst("");
 
-        setDienstFilter("");
-        setFunctieFilter("");
+        setDienstFilter([]);
+        setFunctieFilter([]);
         setAanwezigFilter("");
         setFavorietenFilter("");
 
@@ -301,8 +302,8 @@ function App() {
 
                         setZoekTekst("");
 
-                        setDienstFilter("");
-                        setFunctieFilter("");
+                        setDienstFilter([]);;
+                        setFunctieFilter([]);
                         setAanwezigFilter("");
                         setFavorietenFilter("");
 
@@ -331,8 +332,8 @@ function App() {
 
                         setZoekTekst("");
 
-                        setDienstFilter("");
-                        setFunctieFilter("");
+                        setDienstFilter([]);;
+                        setFunctieFilter([]);
                         setAanwezigFilter("aanwezig");
                         setFavorietenFilter("");
 
@@ -361,8 +362,8 @@ function App() {
 
                         setZoekTekst("");
 
-                        setDienstFilter("");
-                        setFunctieFilter("");
+                        setDienstFilter([]);;
+                        setFunctieFilter([]);
                         setAanwezigFilter("afwezig");
                         setFavorietenFilter("");
 
@@ -407,72 +408,30 @@ function App() {
 
                     {/* DIENST */}
 
-                    <select
-                        value={dienstFilter}
-                        onChange={(e) => {
+                    <MultiSelectFilter
+                        label="Diensten"
+                        opties={diensten}
+                        geselecteerd={dienstFilter}
+                        onChange={(waarden) => {
+                            setDienstFilter(waarden);
 
-                            const dienstNaam =
-                                e.target.value;
-
-                            setDienstFilter(
-                                dienstNaam
-                            );
-
-                            if (dienstNaam === "") {
+                            if (waarden.length === 0) {
                                 setGeselecteerdeDienst(null);
                             }
                         }}
-                    >
-
-                        <option value="">
-                            Alle diensten
-                        </option>
-
-                        {diensten.map(
-                            dienst => (
-
-                                <option
-                                    key={dienst}
-                                    value={dienst}
-                                >
-                                    {dienst}
-                                </option>
-
-                            )
-                        )}
-
-                    </select>
+                    />
 
 
                     {/* GRAAD / FUNCTIE */}
 
-                    <select
-                        value={functieFilter}
-                        onChange={(e) =>
-                            setFunctieFilter(
-                                e.target.value
-                            )
-                        }
-                    >
-
-                        <option value="">
-                            Alle graden
-                        </option>
-
-                        {functies.map(
-                            functie => (
-
-                                <option
-                                    key={functie}
-                                    value={functie}
-                                >
-                                    {functie}
-                                </option>
-
-                            )
-                        )}
-
-                    </select>
+                    <MultiSelectFilter
+                        label="Graden"
+                        opties={functies}
+                        geselecteerd={functieFilter}
+                        onChange={(waarden) => {
+                            setFunctieFilter(waarden);
+                        }}
+                    />
 
 
                     {/* AANWEZIGHEID */}
@@ -588,7 +547,7 @@ function App() {
                                 type="button"
                                 className="filter-chip"
                                 onClick={() => {
-                                    setDienstFilter("");
+                                    setDienstFilter([]);;
                                     setGeselecteerdeDienst(null);
                                 }}
                                 title="Dienstfilter verwijderen"
@@ -603,7 +562,7 @@ function App() {
                                 type="button"
                                 className="filter-chip"
                                 onClick={() =>
-                                    setFunctieFilter("")
+                                    setFunctieFilter([])
                                 }
                                 title="Graadfilter verwijderen"
                             >
@@ -656,7 +615,7 @@ function App() {
                 {/* LINKERKANT */}
 
                 <div className="left-panel">
-
+<h3>Medewerkers geladen: {medewerkers.length}</h3>
                     <MedewerkerLijst
 
                         medewerkers={
@@ -749,11 +708,11 @@ function App() {
                                     );
 
                                 if (dienstNaam) {
-                                    setDienstFilter(dienstNaam);
+                                    setDienstFilter([dienstNaam]);
                                 }
 
                                 setZoekTekst("");
-                                setFunctieFilter("");
+                                setFunctieFilter([]);
                                 setAanwezigFilter("");
                                 setFavorietenFilter("");
                             }}
@@ -770,11 +729,11 @@ function App() {
                                     );
 
                                 if (dienstNaam) {
-                                    setDienstFilter(dienstNaam);
+                                    setDienstFilter([dienstNaam]);
                                 }
 
                                 setZoekTekst("");
-                                setFunctieFilter("");
+                                setFunctieFilter([]);
                                 setAanwezigFilter("aanwezig");
                                 setFavorietenFilter("");
                             }}

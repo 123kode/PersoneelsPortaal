@@ -4,8 +4,8 @@ interface MedewerkerLijstProps {
     medewerkers: Medewerker[];
     zoekTekst: string;
     sorteerVolgorde: string;
-    dienstFilter: string;
-    functieFilter: string;
+    dienstFilter: string[];
+    functieFilter: string[];
     aanwezigFilter: string;
     favorietenFilter: string;
     favorieten: number[];
@@ -58,20 +58,20 @@ function MedewerkerLijst({
 
         .filter(medewerker => {
 
-            if (dienstFilter === "") {
+            if (dienstFilter.length === 0) {
                 return true;
             }
 
-            return medewerker.dienst === dienstFilter;
+            return dienstFilter.includes(medewerker.dienst);
         })
 
         .filter(medewerker => {
 
-            if (functieFilter === "") {
+            if (functieFilter.length === 0) {
                 return true;
             }
 
-            return medewerker.functie === functieFilter;
+            return functieFilter.includes(medewerker.functie);
         })
 
         .filter(medewerker => {

@@ -29,7 +29,8 @@ h2 {
     margin-bottom: 20px;
 }
 
-input {
+input[type="text"],
+input[type="search"] {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -170,6 +171,7 @@ button.dashboard-kaart:active {
 .zoekveld {
     margin-bottom: 15px;
 }
+
 
 .filter-opties {
     display: flex;
@@ -1287,4 +1289,40 @@ button.dashboard-kaart:active {
     color: #444;
 
     white-space: nowrap;
+}
+
+.multi-select-filter {
+    width: 100%;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    background: white;
+    margin-bottom: 10px;
+}
+
+.multi-select-filter summary {
+    cursor: pointer;
+    padding: 10px 12px;
+    font-weight: 600;
+    list-style: none;
+}
+
+.multi-select-lijst {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 16px;
+    padding: 12px;
+}
+
+.multi-select-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px;
+    text-align: left;
+}
+
+.multi-select-item input {
+    margin: 0;
+    flex-shrink: 0;
 }
