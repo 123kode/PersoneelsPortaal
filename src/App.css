@@ -1681,3 +1681,17 @@ button.dashboard-kaart:active {
     color: #555;
     line-height: 1.5;
 }
+
+.demo-badge {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg,#0d6efd,#3b82f6);
+    color: white;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
+}

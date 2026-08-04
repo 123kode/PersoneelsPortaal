@@ -328,7 +328,8 @@ function App() {
                 <div className="portaal-header-inhoud">
 
                     <h1>
-                        🌐VLASconnect
+                        🌐 VLASconnect
+                        <span className="demo-badge">DEMO</span>
                     </h1>
 
                     <p className="subtitel">
