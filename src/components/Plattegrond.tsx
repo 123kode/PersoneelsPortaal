@@ -69,7 +69,6 @@ function Plattegrond() {
 
                         wheel={{
                             step: 0.02,
-                            smoothStep: 0.003,
                         }}
 
                         doubleClick={{
