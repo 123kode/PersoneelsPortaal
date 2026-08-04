@@ -1452,13 +1452,139 @@ button.dashboard-kaart:active {
 }
 
 .plattegrond {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    width: 100%;
+    padding: 10px 20px 30px;
 }
 
-.plattegrond img {
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+.plattegrond h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #003b73;
+}
+
+.gebouw h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #003b73;
+    font-size: 1.4rem;
+}
+
+.gebouw:first-of-type img {
+    max-width: 900px;
+}
+
+.gebouw img {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.gebouw {
+    margin-bottom: 20px;
+}
+
+.gebouw-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 16px;
+    background: #f5f7fa;
+    border: 1px solid #d9e2ec;
+    border-radius: 8px;
+    user-select: none;
+}
+
+.gebouw-header:hover {
+    background: #eaf2fb;
+}
+
+.gebouw-header span {
+    font-size: 18px;
+    width: 20px;
+    color: #003b73;
+}
+
+.gebouw-header h2 {
+    margin: 0;
+    color: #003b73;
+    font-size: 1.2rem;
+}
+
+.gebouw img {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 15px auto 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.hoofdgebouw img {
+    width: 100%;
+    max-width: 900px;
+}
+
+.satellieten img {
+    width: 100%;
+    max-width: 420px;
+}
+
+@media (max-width: 900px) {
+    .satellieten {
+        grid-template-columns: 1fr;
+    }
+}
+
+.klikbare-afbeelding {
+    cursor: zoom-in;
+    transition: transform .2s;
+}
+
+.klikbare-afbeelding:hover {
+    transform: scale(1.02);
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.lightbox-image {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .4);
+}
+
+.sluit-knop {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.satellieten {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.satellieten .gebouw {
+    flex: 1;
+    max-width: 420px;
 }
