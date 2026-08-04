@@ -6,6 +6,7 @@ interface MedewerkerLijstProps {
     sorteerVolgorde: string;
     dienstFilter: string[];
     functieFilter: string[];
+    specifiekeGroepFilter: string[];
     aanwezigFilter: string;
     favorietenFilter: string;
     favorieten: number[];
@@ -25,6 +26,7 @@ function MedewerkerLijst({
     dienstFilter,
     functieFilter,
     aanwezigFilter,
+    specifiekeGroepFilter,
     favorietenFilter,
     favorieten,
     geselecteerdeMedewerker,
@@ -72,6 +74,17 @@ function MedewerkerLijst({
             }
 
             return functieFilter.includes(medewerker.functie);
+        })
+
+        .filter(medewerker => {
+
+            if (specifiekeGroepFilter.length === 0) {
+                return true;
+            }
+
+            return specifiekeGroepFilter.every(groep =>
+                medewerker.specifiekeGroep?.includes(groep)
+            );
         })
 
         .filter(medewerker => {

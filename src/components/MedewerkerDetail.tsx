@@ -2,9 +2,13 @@ import type { Medewerker } from "../models/Medewerker";
 
 interface MedewerkerDetailProps {
     medewerker: Medewerker | null;
+    onOpenPlattegrond: () => void;
 }
 
-function MedewerkerDetail({ medewerker }: MedewerkerDetailProps) {
+function MedewerkerDetail({
+    medewerker,
+    onOpenPlattegrond,
+}: MedewerkerDetailProps) {
 
     if (!medewerker) {
         return (
@@ -97,9 +101,14 @@ function MedewerkerDetail({ medewerker }: MedewerkerDetailProps) {
 
                 <div className="detail-rij">
                     <span className="detail-label">Gebouw</span>
-                    <span>
-                        {medewerker.gebouw || "—"}
-                    </span>
+
+                    <button
+                        type="button"
+                        className="gebouw-link"
+                        onClick={() => onOpenPlattegrond()}
+                    >
+                        🏢 {medewerker.gebouw || "—"}
+                    </button>
                 </div>
 
             </div>

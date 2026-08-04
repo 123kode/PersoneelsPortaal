@@ -1,3 +1,9 @@
+import Voertuigen from "./components/Voertuigen";
+import Radios from "./components/Radios";
+
+import Organogram from "./components/Organogram";
+import { Users, Building2, Network, Car, Radio } from "lucide-react";
+
 import Plattegrond from "./components/Plattegrond";
 
 import GradenFilter from "./components/GradenFilter";
@@ -18,7 +24,15 @@ import MultiSelectFilter from "./components/MultiSelectFilter";
 
 function App() {
 
-    const [weergave, setWeergave] = useState<"lijst" | "plattegrond">("lijst");
+    const [weergave, setWeergave] = useState<
+        "lijst" |
+        "plattegrond" |
+        "organogram" |
+        "voertuigen" |
+        "radios"
+    >("lijst");
+
+    const [specifiekeGroepFilter, setSpecifiekeGroepFilter] = useState<string[]>([]);
 
     const operationeleGraden = [
         "Aspirant-agent",
@@ -242,6 +256,21 @@ function App() {
         ),
     ];
 
+    /* =========================
+       SPECIFIEKE GROEPEN
+       ========================= */
+    const specifiekeGroepen = [
+        ...new Set(
+            medewerkers.flatMap(
+                m => m.specifiekeGroep ?? []
+            )
+        )
+    ].sort((a, b) =>
+        a.localeCompare(b, "nl-BE", {
+            sensitivity: "base",
+        })
+    );
+
 
     /* =========================
        DASHBOARDCIJFERS
@@ -427,7 +456,8 @@ function App() {
                         }
                         onClick={() => setWeergave("lijst")}
                     >
-                        👥 Lijst
+                        <Users size={18} />
+                        <span>Personeelslijst</span>
                     </button>
 
                     <button
@@ -439,7 +469,47 @@ function App() {
                         }
                         onClick={() => setWeergave("plattegrond")}
                     >
-                        🗺️ Plattegrond
+                        <Building2 size={18} />
+                        <span>Plattegronden</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        className={
+                            weergave === "organogram"
+                                ? "switch-knop actief"
+                                : "switch-knop"
+                        }
+                        onClick={() => setWeergave("organogram")}
+                    >
+                        <Network size={18} />
+                        <span>Organogram</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        className={
+                            weergave === "voertuigen"
+                                ? "switch-knop actief"
+                                : "switch-knop"
+                        }
+                        onClick={() => setWeergave("voertuigen")}
+                    >
+                        <Car size={18} />
+                        <span>Voertuigen</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        className={
+                            weergave === "radios"
+                                ? "switch-knop actief"
+                                : "switch-knop"
+                        }
+                        onClick={() => setWeergave("radios")}
+                    >
+                        <Radio size={18} />
+                        <span>Radio's</span>
                     </button>
 
                 </div>
@@ -472,6 +542,13 @@ function App() {
                                 setGeselecteerdeDienst(null);
                             }
                         }}
+                    />
+
+                    <MultiSelectFilter
+                        label="Specifieke groep"
+                        opties={specifiekeGroepen}
+                        geselecteerd={specifiekeGroepFilter}
+                        onChange={setSpecifiekeGroepFilter}
                     />
 
 
@@ -561,7 +638,7 @@ function App() {
                         className="wis-filters-knop"
                         onClick={wisFilters}
                     >
-                        Wis filters
+                        <span>🗑</span> Wis alle filters
                     </button>
 
                 </div>
@@ -650,10 +727,10 @@ function App() {
 
 
             {/* =====================
-                PERSONEEL + DETAIL
-                ===================== */}
+    PERSONEEL
+    ===================== */}
 
-            {weergave === "lijst" ? (
+            {weergave === "lijst" && (
 
                 <div className="main-layout">
 
@@ -663,95 +740,43 @@ function App() {
                     <div className="left-panel">
                         <h3>Medewerkers geladen: {medewerkers.length}</h3>
                         <MedewerkerLijst
-
-                            medewerkers={
-                                medewerkers
-                            }
-
-                            zoekTekst={
-                                zoekTekst
-                            }
-
-                            sorteerVolgorde={
-                                sorteerVolgorde
-                            }
-
-                            dienstFilter={
-                                dienstFilter
-                            }
-
-                            functieFilter={
-                                functieFilter
-                            }
-
-                            aanwezigFilter={
-                                aanwezigFilter
-                            }
-
-                            favorietenFilter={
-                                favorietenFilter
-                            }
-
-                            favorieten={
-                                favorieten
-                            }
-
-                            geselecteerdeMedewerker={
-                                geselecteerdeMedewerker
-                            }
-
-                            onSelecteer={
-                                selecteerMedewerker
-                            }
-
-                            onSelecteerDienst={
-                                selecteerDienst
-                            }
-
-                            onSelecteerFunctie={
-                                selecteerFunctie
-                            }
-
-                            onToggleFavoriet={
-                                toggleFavoriet
-                            }
-
+                            medewerkers={medewerkers}
+                            zoekTekst={zoekTekst}
+                            sorteerVolgorde={sorteerVolgorde}
+                            dienstFilter={dienstFilter}
+                            functieFilter={functieFilter}
+                            specifiekeGroepFilter={specifiekeGroepFilter}   // <-- ontbreekt waarschijnlijk
+                            aanwezigFilter={aanwezigFilter}
+                            favorietenFilter={favorietenFilter}
+                            favorieten={favorieten}
+                            geselecteerdeMedewerker={geselecteerdeMedewerker}
+                            onSelecteer={selecteerMedewerker}
+                            onSelecteerDienst={selecteerDienst}
+                            onSelecteerFunctie={selecteerFunctie}
+                            onToggleFavoriet={toggleFavoriet}
                             onWisFilters={wisFilters}
-
                         />
 
                     </div>
-
 
                     {/* RECHTERKANT */}
 
                     <div className="right-panel">
 
-
                         {geselecteerdeDienst ? (
 
                             <DienstDetail
 
-                                dienst={
-                                    geselecteerdeDienst
-                                }
+                                dienst={geselecteerdeDienst}
 
-                                medewerkers={
-                                    medewerkers
-                                }
+                                medewerkers={medewerkers}
 
                                 onSelecteerMedewerker={selecteerMedewerker}
-
-
-                                /* ALLE MEDEWERKERS
-                                   VAN DE DIENST */
 
                                 onToonMedewerkers={() => {
 
                                     const dienstNaam =
-                                        vindDienstNaam(
-                                            geselecteerdeDienst.naam
-                                        );
+                                        vindDienstNaam(geselecteerdeDienst.naam);
 
                                     if (dienstNaam) {
                                         setDienstFilter([dienstNaam]);
@@ -763,16 +788,10 @@ function App() {
                                     setFavorietenFilter("");
                                 }}
 
-                                /* ALLE AANWEZIGE
-                                   MEDEWERKERS
-                                   VAN DE DIENST */
-
                                 onToonAanwezigen={() => {
 
                                     const dienstNaam =
-                                        vindDienstNaam(
-                                            geselecteerdeDienst.naam
-                                        );
+                                        vindDienstNaam(geselecteerdeDienst.naam);
 
                                     if (dienstNaam) {
                                         setDienstFilter([dienstNaam]);
@@ -789,9 +808,8 @@ function App() {
                         ) : (
 
                             <MedewerkerDetail
-                                medewerker={
-                                    geselecteerdeMedewerker
-                                }
+                                medewerker={geselecteerdeMedewerker}
+                                onOpenPlattegrond={() => setWeergave("plattegrond")}
                             />
 
                         )}
@@ -800,15 +818,43 @@ function App() {
 
                 </div>
 
-            
+            )}
 
-    ) : (
 
-        <Plattegrond />
 
-    )}
+            {/* =====================
+    PLATTEGRONDEN
+    ===================== */}
 
-        </div >
+            {weergave === "plattegrond" && (
+                <Plattegrond />
+            )}
+
+            {/* =====================
+    ORGANOGRAM
+    ===================== */}
+
+            {weergave === "organogram" && (
+                <Organogram />
+            )}
+
+            {/* =====================
+    VOERTUIGEN
+    ===================== */}
+
+            {weergave === "voertuigen" && (
+                <Voertuigen />
+            )}
+
+            {/* =====================
+    RADIO'S
+    ===================== */}
+
+            {weergave === "radios" && (
+                <Radios />
+            )}
+
+        </div>
     );
 }
 
