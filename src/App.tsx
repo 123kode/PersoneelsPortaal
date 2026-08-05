@@ -680,85 +680,86 @@ function App() {
             </div>
 
 
-            {(zoekTekst ||
-                dienstFilter ||
-                functieFilter ||
-                aanwezigFilter ||
-                favorietenFilter) && (
+           {weergave === "lijst" &&
+    (zoekTekst ||
+        dienstFilter.length > 0 ||
+        functieFilter.length > 0 ||
+        aanwezigFilter ||
+        favorietenFilter) && (
 
-                    <div className="actieve-filters">
+    <div className="actieve-filters">
 
-                        <span className="actieve-filters-label">
-                            Actieve filters:
-                        </span>
+        <span className="actieve-filters-label">
+            Actieve filters:
+        </span>
 
-                        {zoekTekst && (
-                            <button
-                                type="button"
-                                className="filter-chip"
-                                onClick={() => setZoekTekst("")}
-                                title="Zoekterm verwijderen"
-                            >
-                                Zoeken: {zoekTekst}
-                                <span>×</span>
-                            </button>
-                        )}
+        {zoekTekst && (
+            <button
+                type="button"
+                className="filter-chip"
+                onClick={() => setZoekTekst("")}
+                title="Zoekterm verwijderen"
+            >
+                Zoeken: {zoekTekst}
+                <span>×</span>
+            </button>
+        )}
 
-                        {dienstFilter.length > 0 && (
-                            <button
-                                type="button"
-                                className="filter-chip"
-                                onClick={() => {
-                                    setDienstFilter([]);
-                                    setGeselecteerdeDienst(null);
-                                }}
-                                title={`Geselecteerd: ${dienstFilter.join(", ")}\nKlik om alle dienstfilters te verwijderen`}
-                            >
-                                🏢 Diensten ({dienstFilter.length})
-                                <span>×</span>
-                            </button>
-                        )}
+        {dienstFilter.length > 0 && (
+            <button
+                type="button"
+                className="filter-chip"
+                onClick={() => {
+                    setDienstFilter([]);
+                    setGeselecteerdeDienst(null);
+                }}
+                title={`Geselecteerd: ${dienstFilter.join(", ")}\nKlik om alle dienstfilters te verwijderen`}
+            >
+                🏢 Diensten ({dienstFilter.length})
+                <span>×</span>
+            </button>
+        )}
 
-                        {functieFilter.length > 0 && (
-                            <button
-                                type="button"
-                                className="filter-chip"
-                                onClick={() => setFunctieFilter([])}
-                                title={`Geselecteerd: ${functieFilter.join(", ")}\nKlik om alle graadfilters te verwijderen`}
-                            >
-                                👮 Graden ({functieFilter.length})
-                                <span>×</span>
-                            </button>
-                        )}
+        {functieFilter.length > 0 && (
+            <button
+                type="button"
+                className="filter-chip"
+                onClick={() => setFunctieFilter([])}
+                title={`Geselecteerd: ${functieFilter.join(", ")}\nKlik om alle graadfilters te verwijderen`}
+            >
+                👮 Graden ({functieFilter.length})
+                <span>×</span>
+            </button>
+        )}
 
-                        {aanwezigFilter && (
-                            <button
-                                type="button"
-                                className="filter-chip"
-                                onClick={() => setAanwezigFilter("")}
-                                title="Aanwezigheidsfilter verwijderen"
-                            >
-                                {aanwezigFilter === "aanwezig"
-                                    ? "🟢 Aanwezig"
-                                    : "🟠 Afwezig"}
-                                <span>×</span>
-                            </button>
-                        )}
+        {aanwezigFilter && (
+            <button
+                type="button"
+                className="filter-chip"
+                onClick={() => setAanwezigFilter("")}
+                title="Aanwezigheidsfilter verwijderen"
+            >
+                {aanwezigFilter === "aanwezig"
+                    ? "🟢 Aanwezig"
+                    : "🟠 Afwezig"}
+                <span>×</span>
+            </button>
+        )}
 
-                        {favorietenFilter && (
-                            <button
-                                type="button"
-                                className="filter-chip"
-                                onClick={() => setFavorietenFilter("")}
-                                title="Favorietenfilter verwijderen"
-                            >
-                                ★ Favorieten
-                                <span>×</span>
-                            </button>
-                        )}
+        {favorietenFilter && (
+            <button
+                type="button"
+                className="filter-chip"
+                onClick={() => setFavorietenFilter("")}
+                title="Favorietenfilter verwijderen"
+            >
+                ★ Favorieten
+                <span>×</span>
+            </button>
+        )}
 
-                    </div>
-                )}
+    </div>
+)}
 
 
 
