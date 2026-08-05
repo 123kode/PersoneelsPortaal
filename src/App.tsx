@@ -32,7 +32,6 @@ function App() {
         "radios"
     >("lijst");
 
-    const isPersoneelslijst = weergave === "lijst";
 
     const [specifiekeGroepFilter, setSpecifiekeGroepFilter] = useState<string[]>([]);
 
