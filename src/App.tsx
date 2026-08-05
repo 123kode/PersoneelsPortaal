@@ -87,6 +87,8 @@ function App() {
         }
     });
 
+    const [teamFilter, setTeamFilter] = useState<string[]>([]);
+
 
     /* =========================
        DATA LADEN
@@ -164,29 +166,27 @@ function App() {
        DIENST SELECTEREN
        ========================= */
 
-    function selecteerDienst(
-        dienstNaam: string
-    ) {
+    function selecteerDienst(dienstNaam: string) {
+
+        setWeergave("lijst");
+
+        setZoekTekst("");
+        setTeamFilter([]);
+        setSpecifiekeGroepFilter([]);
+        setFunctieFilter([]);
+        setAanwezigFilter("");
+        setFavorietenFilter("");
 
         setDienstFilter([dienstNaam]);
 
-        const gevondenDienst =
-            dienstGegevens.find(
-                dienst =>
-                    dienst.naam
-                        .trim()
-                        .toLowerCase() ===
-                    dienstNaam
-                        .trim()
-                        .toLowerCase()
-            );
+        const gevondenDienst = dienstGegevens.find(
+            dienst =>
+                dienst.naam.trim().toLowerCase() ===
+                dienstNaam.trim().toLowerCase()
+        );
 
         if (gevondenDienst) {
-
-            setGeselecteerdeDienst(
-                gevondenDienst
-            );
-
+            setGeselecteerdeDienst(gevondenDienst);
             setGeselecteerdeMedewerker(null);
         }
     }
@@ -218,7 +218,9 @@ function App() {
         setZoekTekst("");
 
         setDienstFilter([]);
+        setTeamFilter([]);          // <-- toevoegen
         setFunctieFilter([]);
+        setSpecifiekeGroepFilter([]); // <-- deze ontbreekt trouwens ook
         setAanwezigFilter("");
         setFavorietenFilter("");
 
@@ -241,6 +243,19 @@ function App() {
             )
         )
     ].sort();
+
+
+    /* =========================
+     TEAMS
+     ========================= */
+    const teams = [
+        ...new Set(
+            medewerkers
+                .map(m => m.team)
+                .filter((team): team is string => !!team)
+        )
+    ].sort();
+
 
 
     /* =========================
@@ -310,6 +325,11 @@ function App() {
         );
     }
 
+
+    const toonTeam = (team: string) => {
+        setWeergave("lijst");
+        setTeamFilter([team]);
+    };
 
     /* =========================
        SCHERM
@@ -550,6 +570,13 @@ function App() {
                             />
 
                             <MultiSelectFilter
+                                label="Team"
+                                opties={teams}
+                                geselecteerd={teamFilter}
+                                onChange={setTeamFilter}
+                            />
+
+                            <MultiSelectFilter
                                 label="Specifieke groep"
                                 opties={specifiekeGroepen}
                                 geselecteerd={specifiekeGroepFilter}
@@ -753,8 +780,9 @@ function App() {
                             zoekTekst={zoekTekst}
                             sorteerVolgorde={sorteerVolgorde}
                             dienstFilter={dienstFilter}
+                            teamFilter={teamFilter}
                             functieFilter={functieFilter}
-                            specifiekeGroepFilter={specifiekeGroepFilter}   // <-- ontbreekt waarschijnlijk
+                            specifiekeGroepFilter={specifiekeGroepFilter}
                             aanwezigFilter={aanwezigFilter}
                             favorietenFilter={favorietenFilter}
                             favorieten={favorieten}
@@ -819,6 +847,8 @@ function App() {
                             <MedewerkerDetail
                                 medewerker={geselecteerdeMedewerker}
                                 onOpenPlattegrond={() => setWeergave("plattegrond")}
+                                onTeamClick={toonTeam}
+                                onDienstClick={selecteerDienst}
                             />
 
                         )}

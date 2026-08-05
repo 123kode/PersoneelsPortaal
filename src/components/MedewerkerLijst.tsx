@@ -5,6 +5,7 @@ interface MedewerkerLijstProps {
     zoekTekst: string;
     sorteerVolgorde: string;
     dienstFilter: string[];
+    teamFilter: string[];
     functieFilter: string[];
     specifiekeGroepFilter: string[];
     aanwezigFilter: string;
@@ -24,6 +25,7 @@ function MedewerkerLijst({
     zoekTekst,
     sorteerVolgorde,
     dienstFilter,
+    teamFilter,
     functieFilter,
     aanwezigFilter,
     specifiekeGroepFilter,
@@ -35,7 +37,8 @@ function MedewerkerLijst({
     onToggleFavoriet,
     onWisFilters,
 }: MedewerkerLijstProps) {
-
+console.log("dienstFilter:", dienstFilter);
+console.log("teamFilter:", teamFilter);
     const gefilterdeMedewerkers = medewerkers
 
         .filter(medewerker => {
@@ -65,6 +68,18 @@ function MedewerkerLijst({
             }
 
             return dienstFilter.includes(medewerker.dienst);
+        })
+
+        .filter(medewerker => {
+
+            if (teamFilter.length === 0) {
+                return true;
+            }
+
+            return (
+                medewerker.team !== undefined &&
+                teamFilter.includes(medewerker.team)
+            );
         })
 
         .filter(medewerker => {

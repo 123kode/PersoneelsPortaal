@@ -1,0 +1,20 @@
+[33me9c4611[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Wegvallen filters bij andere dan personeel - bug fix
+[33m9acead1[m Wegvallen filters bij andere dan personeel
+[33m7731e2e[m DEMO in header
+[33mc055e72[m Fix build
+[33m449691d[m Versie 1.5 - Met vtg en radio
+[33mac89a1a[m Versie 1.5 - Plattegrondweergave all names  toegevoegd
+[33maab3514[m Versie 1.5 - Plattegrondweergave clickable  toegevoegd
+[33m021635c[m Versie 1.5 - Plattegrondweergave modern toegevoegd
+[33mf252026[m Versie 1.5 - Plattegrondweergave toegevoegd
+[33m14cb3e3[m Filters toont aantallen
+[33mad36b8a[m Filters toont aantallen
+[33m1650d41[m Aparte GradenFilter toegevoegd
+[33m0686b9a[m Aparte GradenFilter toegevoegd
+[33mb524668[m Toegevoegd: multiselect filters voor diensten en graden
+[33md2fecf0[m Fix Vercel base path
+[33m4ccc7f8[m Fix Vercel build
+[33m8c604af[m Update personeelsportaal
+[33m0773959[m Set base path for Vite configuration
+[33m2982739[m Update GitHub Actions workflow for deployment
+[33m05b275b[m Eerste versie PersoneelsPortaal

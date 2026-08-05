@@ -3,11 +3,15 @@ import type { Medewerker } from "../models/Medewerker";
 interface MedewerkerDetailProps {
     medewerker: Medewerker | null;
     onOpenPlattegrond: () => void;
+    onTeamClick: (team: string) => void;
+    onDienstClick: (dienst: string) => void;
 }
 
 function MedewerkerDetail({
     medewerker,
     onOpenPlattegrond,
+    onTeamClick,
+    onDienstClick,
 }: MedewerkerDetailProps) {
 
     if (!medewerker) {
@@ -58,7 +62,6 @@ function MedewerkerDetail({
 
             </div>
 
-
             {/* WERKGEGEVENS */}
 
             <div className="detail-gegevens">
@@ -69,20 +72,33 @@ function MedewerkerDetail({
 
                 <div className="detail-rij">
                     <span className="detail-label">Afdeling</span>
-                    <span className="dienst-badge">
+
+                    <button
+                        className="detail-link"
+                        onClick={() => onDienstClick(medewerker.dienst)}
+                    >
                         {medewerker.dienst}
-                    </span>
+                    </button>
                 </div>
 
                 <div className="detail-rij">
                     <span className="detail-label">Team</span>
-                    <span>
+
+                    <button
+                        className="detail-link"
+                        onClick={() => {
+                            if (medewerker.team) {
+                                onTeamClick(medewerker.team);
+                            }
+                        }}
+                    >
                         {medewerker.team || "—"}
-                    </span>
+                    </button>
                 </div>
 
                 <div className="detail-rij">
                     <span className="detail-label">Specifieke groep</span>
+
                     <div className="groep-tags">
                         {medewerker.specifiekeGroep?.length ? (
                             medewerker.specifiekeGroep.map((groep) => (
@@ -105,14 +121,13 @@ function MedewerkerDetail({
                     <button
                         type="button"
                         className="gebouw-link"
-                        onClick={() => onOpenPlattegrond()}
+                        onClick={onOpenPlattegrond}
                     >
                         🏢 {medewerker.gebouw || "—"}
                     </button>
                 </div>
 
             </div>
-
 
             {/* CONTACT */}
 
@@ -179,7 +194,6 @@ function MedewerkerDetail({
                 </div>
 
             </div>
-
 
             {/* DEMO: GEPLANDE PRESTATIES */}
 
