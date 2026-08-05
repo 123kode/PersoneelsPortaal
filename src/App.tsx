@@ -32,6 +32,8 @@ function App() {
         "radios"
     >("lijst");
 
+    const isPersoneelslijst = weergave === "lijst";
+
     const [specifiekeGroepFilter, setSpecifiekeGroepFilter] = useState<string[]>([]);
 
     const operationeleGraden = [
@@ -515,136 +517,142 @@ function App() {
 
                 </div>
 
-                <div className="zoekveld">
+                {weergave === "lijst" && (
+                    <>
 
-                    <ZoekBalk
-                        zoekTekst={zoekTekst}
-                        onZoekTekstChanged={
-                            setZoekTekst
-                        }
-                    />
+                        <div className="zoekveld">
 
-                </div>
+                            <ZoekBalk
+                                zoekTekst={zoekTekst}
+                                onZoekTekstChanged={
+                                    setZoekTekst
+                                }
+                            />
 
-
-                <div className="filter-opties">
-
-
-                    {/* DIENST */}
-
-                    <MultiSelectFilter
-                        label="Afdeling"
-                        opties={diensten}
-                        geselecteerd={dienstFilter}
-                        onChange={(waarden) => {
-                            setDienstFilter(waarden);
-
-                            if (waarden.length === 0) {
-                                setGeselecteerdeDienst(null);
-                            }
-                        }}
-                    />
-
-                    <MultiSelectFilter
-                        label="Specifieke groep"
-                        opties={specifiekeGroepen}
-                        geselecteerd={specifiekeGroepFilter}
-                        onChange={setSpecifiekeGroepFilter}
-                    />
+                        </div>
 
 
-                    {/* GRAAD / FUNCTIE */}
-
-                    <GradenFilter
-                        beschikbareGraden={functies}
-                        geselecteerd={functieFilter}
-                        onChange={setFunctieFilter}
-                    />
+                        <div className="filter-opties">
 
 
-                    {/* AANWEZIGHEID */}
+                            {/* DIENST */}
 
-                    <select
-                        value={aanwezigFilter}
-                        onChange={(e) =>
-                            setAanwezigFilter(
-                                e.target.value
-                            )
-                        }
-                    >
+                            <MultiSelectFilter
+                                label="Afdeling"
+                                opties={diensten}
+                                geselecteerd={dienstFilter}
+                                onChange={(waarden) => {
+                                    setDienstFilter(waarden);
 
-                        <option value="">
-                            Iedereen
-                        </option>
+                                    if (waarden.length === 0) {
+                                        setGeselecteerdeDienst(null);
+                                    }
+                                }}
+                            />
 
-                        <option value="aanwezig">
-                            Aanwezig
-                        </option>
-
-                        <option value="afwezig">
-                            Afwezig
-                        </option>
-
-                    </select>
+                            <MultiSelectFilter
+                                label="Specifieke groep"
+                                opties={specifiekeGroepen}
+                                geselecteerd={specifiekeGroepFilter}
+                                onChange={setSpecifiekeGroepFilter}
+                            />
 
 
-                    {/* FAVORIETEN */}
+                            {/* GRAAD / FUNCTIE */}
 
-                    <select
-                        value={favorietenFilter}
-                        onChange={(e) =>
-                            setFavorietenFilter(
-                                e.target.value
-                            )
-                        }
-                    >
-
-                        <option value="">
-                            Alle medewerkers
-                        </option>
-
-                        <option value="favorieten">
-                            ★ Favorieten
-                        </option>
-
-                    </select>
+                            <GradenFilter
+                                beschikbareGraden={functies}
+                                geselecteerd={functieFilter}
+                                onChange={setFunctieFilter}
+                            />
 
 
-                    {/* SORTERING */}
+                            {/* AANWEZIGHEID */}
 
-                    <select
-                        value={sorteerVolgorde}
-                        onChange={(e) =>
-                            setSorteerVolgorde(
-                                e.target.value
-                            )
-                        }
-                    >
+                            <select
+                                value={aanwezigFilter}
+                                onChange={(e) =>
+                                    setAanwezigFilter(
+                                        e.target.value
+                                    )
+                                }
+                            >
 
-                        <option value="AZ">
-                            Naam A-Z
-                        </option>
+                                <option value="">
+                                    Iedereen
+                                </option>
 
-                        <option value="ZA">
-                            Naam Z-A
-                        </option>
+                                <option value="aanwezig">
+                                    Aanwezig
+                                </option>
 
-                    </select>
+                                <option value="afwezig">
+                                    Afwezig
+                                </option>
+
+                            </select>
 
 
-                    {/* WIS FILTERS */}
+                            {/* FAVORIETEN */}
 
-                    <button
-                        type="button"
-                        className="wis-filters-knop"
-                        onClick={wisFilters}
-                    >
-                        <span>🗑</span> Wis alle filters
-                    </button>
+                            <select
+                                value={favorietenFilter}
+                                onChange={(e) =>
+                                    setFavorietenFilter(
+                                        e.target.value
+                                    )
+                                }
+                            >
 
-                </div>
+                                <option value="">
+                                    Alle medewerkers
+                                </option>
 
+                                <option value="favorieten">
+                                    ★ Favorieten
+                                </option>
+
+                            </select>
+
+
+                            {/* SORTERING */}
+
+                            <select
+                                value={sorteerVolgorde}
+                                onChange={(e) =>
+                                    setSorteerVolgorde(
+                                        e.target.value
+                                    )
+                                }
+                            >
+
+                                <option value="AZ">
+                                    Naam A-Z
+                                </option>
+
+                                <option value="ZA">
+                                    Naam Z-A
+                                </option>
+
+                            </select>
+
+
+                            {/* WIS FILTERS */}
+
+                            <button
+                                type="button"
+                                className="wis-filters-knop"
+                                onClick={wisFilters}
+                            >
+                                <span>🗑</span> Wis alle filters
+                            </button>
+
+                        </div>
+
+                    </>
+                )}
             </div>
+
 
             {(zoekTekst ||
                 dienstFilter ||
@@ -725,6 +733,7 @@ function App() {
 
                     </div>
                 )}
+
 
 
             {/* =====================
